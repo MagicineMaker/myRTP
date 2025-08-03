@@ -25,16 +25,16 @@ endif()
 
 unset(DL CACHE)
 
-include_directories(/usr/local/include)
+include_directories(/usr/local/include include)
 link_directories(/usr/local/lib)
 include(GoogleTest)
 
 add_library(rtp_all src/util.c)
 
-add_executable(sender src/sender.c)
+add_executable(sender src/sender.c src/packet.c)
 target_link_libraries(sender PUBLIC rtp_all)
 
-add_executable(receiver src/receiver.c)
+add_executable(receiver src/receiver.c src/packet.c)
 target_link_libraries(receiver PUBLIC rtp_all)
 
 add_executable(rtp_test_all src/test.cpp)

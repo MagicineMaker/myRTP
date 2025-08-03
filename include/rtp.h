@@ -28,6 +28,8 @@ typedef struct __attribute__((__packed__)) RtpPacket {
     char payload[PAYLOAD_MAX]; // data
 } rtp_packet_t;
 
+#define LENGTH(packet) (packet->rtp.length + 11)
+
 #ifdef __cplusplus
 }
 #endif

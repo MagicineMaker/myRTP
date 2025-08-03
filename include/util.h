@@ -10,8 +10,20 @@ extern "C" {
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <time.h>
+
+#include "rtp.h"
+
+#define MAX_RETRY 50
+
+typedef unsigned short port_t;
 
 uint32_t compute_checksum(const void *pkt, size_t n_bytes);
+int examine_checksum(rtp_packet_t *packet);
+int wrapped_recvfrom(int sockfd, rtp_packet_t *buffer, int tv_sec, int tv_usec, struct sockaddr_in *writeAddr, socklen_t *writeLen);
+int is_timeout(struct timeval *tv, struct timeval *tv_s, long long t);
 
 // Use it to display a help message
 #define LOG_MSG(...)                                                    \
